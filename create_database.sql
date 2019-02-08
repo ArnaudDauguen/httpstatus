@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS history
 (
     id INT NOT NULL AUTO_INCREMENT,
     site_id INT NOT NULL,
-    update_time VARCHAR(255) NOT NULL,
+    update_time DATETIME NULL,
     status INT NOT NULL,
     PRIMARY KEY (id)
 );
