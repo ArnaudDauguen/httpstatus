@@ -9,6 +9,10 @@
         '/api/add/',
         '/api/add/{api_key}'
       ],
+      'delete' => [
+        '/api/delete/{id}/',
+        '/api/delete/{id}/{api_key}/'
+      ],
       'home' => [
         '/api/',
         '/api/{api_key}/'

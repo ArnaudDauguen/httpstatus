@@ -99,4 +99,26 @@ class Api extends \ApiController
 
 		return $this->json(array('success' => true, 'id' => $id));
 	}
+
+	public function delete_delete (int $id, string $api_key = '')
+	{
+		if (!$this->check_api_key($api_key))
+		{
+			return $this->json(array('success' => false));
+		}
+
+		$site = $this->model_site->remove($id);
+
+		if (!$site)
+		{
+			return $this->json(array('success' => false));
+		}
+
+		return $this->json(array('success' => true));
+	}
+
+	public function get_delete (int $id, string $api_key = '')
+	{
+		return $this->delete_delete($id, $api_key);
+	}
 }
