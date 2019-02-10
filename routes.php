@@ -1,12 +1,15 @@
 <?php
-    $routes = array(
-		'Index' => [
-			'home' => '/',
-			'show_value' => [
-				'/show-value/{first_value}/',
-				'/show-value/{first_value}/{second_value}/',
-			],
-        ],
-    );
+  $routes = array(
+    'Api' => [
+      'list' => [
+        '/api/list/',
+        '/api/list/{api_key}/'
+      ],
+      'home' => [
+        '/api/',
+        '/api/{api_key}/'
+      ],
+    ],
+  );
 
-    define('ROUTES', $routes);
+  define('ROUTES', $routes);
