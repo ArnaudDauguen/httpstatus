@@ -3,6 +3,7 @@ namespace controllers\publics;
 
 use \models\Users as ModelUser;
 use \models\Sites as ModelSite;
+use \models\History as ModelHistory;
 
 class Api extends \ApiController
 {
@@ -10,6 +11,7 @@ class Api extends \ApiController
 	{
 		$this->model_user = new ModelUser($pdo);
 		$this->model_site = new ModelSite($pdo);
+		$this->model_history = new ModelHistory($pdo);
 
 		parent::__construct($pdo);
 	}
@@ -120,5 +122,24 @@ class Api extends \ApiController
 	public function get_delete (int $id, string $api_key = '')
 	{
 		return $this->delete_delete($id, $api_key);
+	}
+
+	public function get_status (int $site_id, string $api_key = '')
+	{
+		if (!$this->check_api_key($api_key))
+		{
+			return $this->json(array('success' => false));
+		}
+
+		$site = $this->model_history->get_last_status($site_id);
+
+		if (!$site)
+		{
+			return $this->json(array('success' => false));
+		}
+
+		$status = (int) $site['status'];
+
+		return $this->json(array('success' => true, 'status' => $status));
 	}
 }

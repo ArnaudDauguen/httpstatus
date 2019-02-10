@@ -13,6 +13,10 @@
         '/api/delete/{id}/',
         '/api/delete/{id}/{api_key}/'
       ],
+      'status' => [
+        '/api/status/{site_id}',
+        '/api/status/{site_id}/{api_key}'
+      ],
       'home' => [
         '/api/',
         '/api/{api_key}/'
