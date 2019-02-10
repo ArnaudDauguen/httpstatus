@@ -14,19 +14,19 @@ class Api extends \ApiController
 		parent::__construct($pdo);
 	}
 
-	protected function get_api_key (?string $api_key) 
+	protected function get_api_key (string $api_key) 
 	{
-		if ($api_key === null || empty($api_key))
+		if (empty($api_key))
 		{
 			if (!isset($_GET['api_key']) || empty($_GET['api_key'])) return null;
 
 			$api_key = $_GET['api_key'];
 		}
 
-		return $api_key;
+		return htmlspecialchars($api_key);
 	}
 
-	protected function check_api_key (?string $api_key)
+	protected function check_api_key (string $api_key)
 	{
 		$api_key = $this->get_api_key($api_key);
 
@@ -45,7 +45,7 @@ class Api extends \ApiController
 		return true;
 	}
 
-	public function get_home (?string $api_key = null)
+	public function get_home (string $api_key = '')
 	{
 		if (!$this->check_api_key($api_key))
 		{
@@ -55,7 +55,7 @@ class Api extends \ApiController
 		return $this->json(array('version' => 1, 'list' => HTTP_PWD . '/api/list'));
 	}
 
-	public function get_list (?string $api_key = null)
+	public function get_list (string $api_key = '')
 	{
 		if (!$this->check_api_key($api_key))
 		{
@@ -74,5 +74,29 @@ class Api extends \ApiController
 		}
 
 		$this->json(array('version' => 1, 'websites' => $sites));
+	}
+
+	public function post_add (string $api_key = '')
+	{
+		if (!$this->check_api_key($api_key))
+		{
+			return $this->json(array('success' => false));
+		}
+
+		$site = $this->model_site->create(htmlspecialchars($_POST['url']));
+
+		if (!$site)
+		{
+			return $this->json(array('success' => false));
+		}
+
+		$id = $this->model_site->last_id();
+
+		if ($id === null || empty($id))
+		{
+			return $this->json(array('success' => false));
+		}
+
+		return $this->json(array('success' => true, 'id' => $id));
 	}
 }
