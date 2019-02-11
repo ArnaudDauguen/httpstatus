@@ -13,6 +13,11 @@ class History extends \Model
         return $this->get('history', ['site_id' => $site_id]);
     }
 
+    public function get_website_history_by_id (int $site_id)
+    {
+        return $this->get('history', ['site_id' => $site_id], 'update_time', true);
+    }
+
     public function get_last_status (int $site_id)
     {
         return $this->get_one('history', ['site_id' => $site_id], 'update_time', true);

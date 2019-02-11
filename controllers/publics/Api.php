@@ -142,4 +142,26 @@ class Api extends \ApiController
 
 		return $this->json(array('success' => true, 'status' => $status));
 	}
+
+	public function get_history (int $site_id, string $api_key = '')
+	{
+		if (!$this->check_api_key($api_key))
+		{
+			return $this->json(array('success' => false));
+		}
+
+		$history = $this->model_history->get_website_history_by_id($site_id);
+
+		if (!$history)
+		{
+			return $this->json(array('success' => false));
+		}
+
+		foreach ($history as $update)
+		{
+			
+		}
+
+		return $this->json(array('success' => true, 'history' => $history));
+	}
 }
