@@ -14,8 +14,12 @@
         '/api/delete/{id}/{api_key}/'
       ],
       'status' => [
-        '/api/status/{site_id}',
-        '/api/status/{site_id}/{api_key}'
+        '/api/status/{site_id}/',
+        '/api/status/{site_id}/{api_key}/'
+      ],
+      'history' => [
+        '/api/history/{site_id}/',
+        '/api/history/{site_id}/{api_key}/'
       ],
       'home' => [
         '/api/',
