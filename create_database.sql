@@ -28,3 +28,6 @@ CREATE TABLE IF NOT EXISTS history
     status INT NOT NULL,
     PRIMARY KEY (id)
 );
+
+-- Create first admin
+INSERT INTO users (email, password, api_key) VALUES ('deschaussettes@yopmail.com', '$2y$10$qjOyP7OU21jn/T5QEIBKdu6dM7rHE.2ZbeX9HQnqS13SmdqDhcFGC', 'abcdefghjaimelesapis');
