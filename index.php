@@ -23,6 +23,13 @@
 		$_SESSION['csrf'] = str_shuffle(uniqid().uniqid());
 	}
 
+	//Create logged token if it didn't exist
+	if (!isset($_SESSION['logged']))
+	{
+		$_SESSION['logged'] = false;
+		echo $_SESSION['logged'];
+	}
+
 	##############
 	# INCLUDE    #
 	##############

@@ -54,6 +54,7 @@
                     continue;
                 }
 
+
                 return $url . $route . ($get_params ? '?' . $get_params : '');
             }
 

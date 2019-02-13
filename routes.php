@@ -29,6 +29,7 @@
     'WebUI' => [
       'home' => '/',
       'login' => '/login',
+      'logout' => '/logout',
       'see_history_by_site_id' => '/history/{site_id}',
     ]
   );
