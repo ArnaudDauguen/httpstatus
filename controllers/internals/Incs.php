@@ -20,4 +20,13 @@ class Incs extends \Controller
 		return self::render("incs/footer");
     }
 
+    /**
+     * Print a variable with <pre>
+     */
+    public static function debug($value){
+      echo "<pre>";
+      print_r($value);
+      echo "</pre>";
+    }
+
 }
