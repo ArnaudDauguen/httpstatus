@@ -31,6 +31,9 @@
       'login' => '/login',
       'logout' => '/logout',
       'see_history_by_site_id' => '/history/{site_id}',
+      'add' => '/add_site',
+      'edit_by_id' => '/edit/{site_id}',
+      'delete_by_id' => '/delete/{site_id}',
     ]
   );
 

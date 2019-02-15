@@ -1,5 +1,6 @@
 <?php
 	$_SESSION['come_from'] = HTTP_PWD;
+	$logged = $_SESSION['logged'];
 ?>
 
 <!DOCTYPE html>
@@ -11,10 +12,17 @@
 	</head>
 	<body>
 		<nav>
+			<?php
+				if($logged){
+			?>
+					<a href="<?php echo HTTP_PWD . '/add_site'; ?>" > Add </a>
+			<?php
+				}
+			?>
 			<?php if($_SESSION['logged'] === true){ ?>
-				<a href="<?php echo HTTP_PWD . '/logout'; ?>" > Deconnexion </a>
+				<a href="<?php echo HTTP_PWD . '/logout'; ?>" > Loggout </a>
 			<?php }else{ ?>
-				<a href="<?php echo HTTP_PWD . '/login'; ?>"> Connexion </a>
+				<a href="<?php echo HTTP_PWD . '/login'; ?>"> Login </a>
 			<?php } ?>
 		</nav>
 

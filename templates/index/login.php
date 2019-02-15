@@ -1,4 +1,4 @@
-<?php \controllers\internals\Incs::head('Httpstatus Sella-Dauguen'); ?>
+<?php \controllers\internals\Incs::head('Httpstatus Sella-Dauguen - Login'); ?>
     
     <form action="" method="POST" class="form">
         <div class="form">
@@ -10,7 +10,7 @@
             <input type="password" name="password" id="email" required>
         </div>
         <div class="form">
-            <input type="submit" value="Connexion">
+            <input type="submit" value="Connection">
         </div>
     </form>
 
