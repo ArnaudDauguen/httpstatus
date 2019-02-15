@@ -80,12 +80,15 @@ class Api extends \ApiController
 
 	public function post_add (string $api_key = '')
 	{
+		$api_key = $this->get_api_key($api_key);
+
 		if (!$this->check_api_key($api_key))
 		{
 			return $this->json(array('success' => false));
 		}
 
-		$site = $this->model_site->create(htmlspecialchars($_POST['url']));
+		$user = $this->model_user->get_one_by_api_key($api_key);
+		$site = $this->model_site->create($user['id'], htmlspecialchars($_POST['url']));
 
 		if (!$site)
 		{

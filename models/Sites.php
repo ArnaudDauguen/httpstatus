@@ -13,9 +13,10 @@ class Sites extends \Model
         return $this->get_one('sites', ['url' => $url]);
     }
 
-    public function create (string $url)
+    public function create (int $user_id, string $url)
     {   
         return $this->insert('sites', [
+            'user_id' => $user_id,
             'url' => $url,
         ]);
     }
