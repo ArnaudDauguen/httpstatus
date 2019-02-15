@@ -77,7 +77,7 @@ class WebsiteStatus extends \InternalController
             $two_hours_before = new \DateTime('now');
             $two_hours_before = $two_hours_before->sub(new \DateInterval('PT2H'));
 
-            if (true)//(!in_array(true, $website_errors) && $two_hours_before >= new \DateTime($site['last_mail']))
+            if (!in_array(true, $website_errors) && $two_hours_before >= new \DateTime($site['last_mail']))
             {
                 $mail = $this->send_mail($site);
 
