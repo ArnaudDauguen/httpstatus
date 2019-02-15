@@ -3,13 +3,15 @@ namespace controllers\internals;
 
 use \models\Sites as ModelSite;
 use \models\History as ModelHistory;
+use \models\Users as ModelUser;
 
 class WebsiteStatus extends \InternalController
 {
     public function __construct (?\PDO $pdo = null)
     {
 		$this->model_site = new ModelSite($pdo);
-		$this->model_history = new ModelHistory($pdo);
+        $this->model_history = new ModelHistory($pdo);
+        $this->model_user = new ModelUser($pdo);
 
         parent::__construct($pdo);
     }
@@ -38,9 +40,18 @@ class WebsiteStatus extends \InternalController
         return $status < 400;
     }
 
-    public function send_mail (int $site_id) : bool
+    public function send_mail (array $site) : void
     {
-        return false;
+        $user = $this->model_user->get_one_by_id($site['user_id']);
+        $mail_address = $user['email'];
+
+        $subject = "[HTTPSTATUS] " . $site['url'] . " is down!";
+
+        $now = new \DateTime('now');
+        $message = "The website " . $site['url'] . " is down since " . $now->format('Y-m-d H:i:s') . "!\n";
+        $message .= "See the last status at: http://127.0.0.1/httpstatus/history/" . $site['id'] . ".\n";
+
+        mail($mail_address, $subject, $message);
     }
 
     public function init ()
@@ -66,14 +77,12 @@ class WebsiteStatus extends \InternalController
             $two_hours_before = new \DateTime('now');
             $two_hours_before = $two_hours_before->sub(new \DateInterval('PT2H'));
 
-            if (!in_array(true, $website_errors) && $two_hours_before >= new \DateTime($site['last_mail']))
+            if (true)//(!in_array(true, $website_errors) && $two_hours_before >= new \DateTime($site['last_mail']))
             {
-                $mail = $this->send_mail($site['id']);
+                $mail = $this->send_mail($site);
 
-                if ($mail)
-                {
-                    $this->model_site->update('sites', ['last_mail' => $now->getTimestamp()], ['id' => $site['id']]);
-                }
+                $now = new \DateTime('now');
+                $this->model_site->update('sites', ['last_mail' => $now->format('Y-m-d H:i:s')], ['id' => $site['id']]);
             }
         }
     }
