@@ -32,6 +32,11 @@ class WebsiteStatus extends \InternalController
 
         curl_close($curl);
 
+        if ($status < 100 || $status === null)
+        {
+            $status = 999;
+        }
+
         return $status;
     }
 
@@ -60,7 +65,7 @@ class WebsiteStatus extends \InternalController
 
         foreach ($sites as $site)
         {
-            $status = $this->get_website_status($site['url']) ?? 999;
+            $status = $this->get_website_status($site['url']);
 
             $this->model_history->create($site['id'], $status);
 
