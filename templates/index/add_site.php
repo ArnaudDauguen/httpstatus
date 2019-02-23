@@ -1,13 +1,16 @@
 <?php \controllers\internals\Incs::head('Httpstatus Sella-Dauguen - Add a Site'); ?>
     
-    <form action="" method="POST" class="form">
-        <div class="form">
-            <label for="name">Enter url for website to be tracked: </label>
-            <input type="text" name="url" id="url" required>
-        </div>
-        <div class="form">
-            <input type="submit" value="Add">
-        </div>
-    </form>
+    <div class="container">
+
+        <form action="" method="POST" class="form">
+            <h3>Add a site to track</h3>
+            <div class="form-group">
+                <label for="name">url : </label> </br>
+                <input type="text" name="url" id="url" required>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+
+    </div>
 
 <?php \controllers\internals\Incs::footer(); ?>

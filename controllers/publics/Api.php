@@ -113,8 +113,9 @@ class Api extends \ApiController
 		}
 
 		$site = $this->model_site->remove($id);
+		$history = $this->model_history->remove_site_history($id);
 
-		if (!$site)
+		if (!$site || !$history)
 		{
 			return $this->json(array('success' => false));
 		}

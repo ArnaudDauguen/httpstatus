@@ -88,6 +88,7 @@ class WebUI extends \Controller{
 
     public function delete_by_id(int $site_id){
         $this->model_site->remove($site_id);
+        $this->model_history->remove_site_history($site_id);
         header('location:' . $_SESSION['come_from']);
 
     }

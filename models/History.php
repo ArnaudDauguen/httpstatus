@@ -50,4 +50,7 @@ class History extends \Model
     {
         return $this->delete('history', ['id' => $id]);
     }
+    public function remove_site_history (int $site_id){
+        return $this->delete('history', ['site_id' => $site_id]);
+    }
 }
