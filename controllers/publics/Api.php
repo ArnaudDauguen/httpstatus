@@ -66,6 +66,7 @@ class Api extends \ApiController
 
 		$sites = $this->model_site->get('sites');
 
+
 		foreach ($sites as $key => $site)
 		{
 			$site['delete'] = HTTP_PWD . '/api/delete/' . $site['id'];
@@ -73,6 +74,8 @@ class Api extends \ApiController
 			$site['history'] = HTTP_PWD . '/api/history/' . $site['id'];
 
 			$sites[$key] = $site;
+			unset($sites[$key]['user_id']);
+			unset($sites[$key]['last_mail']);
 		}
 
 		$this->json(array('version' => 1, 'websites' => $sites));
@@ -153,7 +156,7 @@ class Api extends \ApiController
 
 		$status = array('code' => (int) $site['status'], 'at' => $site['update_time']);
 
-		return $this->json(array('success' => true, 'id' => $site_id, 'url' => $url, 'status' => $status));
+		return $this->json(array('id' => $site_id, 'url' => $url, 'status' => $status));
 	}
 
 	public function get_history (int $site_id, string $api_key = '')
@@ -185,6 +188,6 @@ class Api extends \ApiController
 
 		$url = $site['url'];
 
-		return $this->json(array('success' => true, 'id' => $site_id, 'url' => $url, 'status' => $history));
+		return $this->json(array('id' => $site_id, 'url' => $url, 'status' => $history));
 	}
 }
