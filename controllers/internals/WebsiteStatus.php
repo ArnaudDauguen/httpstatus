@@ -99,5 +99,7 @@ class WebsiteStatus extends \InternalController
                 $this->model_site->update('sites', ['last_mail' => $now->format('Y-m-d H:i:s')], ['id' => $site['id']]);
             }
         }
+
+        sleep(1);
     }
 }

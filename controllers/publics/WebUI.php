@@ -39,7 +39,7 @@ class WebUI extends \Controller{
 
     public function see_history_by_site_id(int $site_id){
 
-        $complete_history = $this->model_history->get_by_site_id($site_id, "update_time", true);
+        $complete_history = $this->model_history->get_by_site_id($site_id, "update_time", false);
 
         return $this->render('index/history', array('site_id' => $site_id, 'complete_history' => $complete_history));
     }
@@ -92,16 +92,7 @@ class WebUI extends \Controller{
         header('location:' . $_SESSION['come_from']);
 
     }
-
-
-
-
-
-
-
-
-
-
+    
 
     public function login(){
         if(!isset($_POST['email']) or !isset($_POST['password'])){
