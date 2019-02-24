@@ -42,7 +42,7 @@ class WebsiteStatus extends \InternalController
 
     public function check_status (int $status) : bool
     {
-        return $status < 400;
+        return ($status < 400 || $status === 999);
     }
 
     public function send_mail (array $site) : void
@@ -65,6 +65,15 @@ class WebsiteStatus extends \InternalController
 
         foreach ($sites as $site)
         {
+            $last_update = $this->model_history->get_last_status($site['id']);
+
+            $two_minutes_before = new \DateTime('now');
+            $two_minutes_before = $two_minutes_before->sub(new \DateInterval('PT2M'));
+
+            if ($two_minutes_before <= new \DateTime($last_update['update_time'])) {
+                continue;
+            }
+
             $status = $this->get_website_status($site['url']);
 
             $this->model_history->create($site['id'], $status);
